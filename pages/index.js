@@ -6,6 +6,13 @@ import Cookies from "universal-cookie";
 
 const cookie = new Cookies();
 
+var webAuth = new WebAuth({
+  domain: process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL,
+  clientID: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID,
+  redirectUri: "http://localhost:3000",
+  scope: "openid profile email",
+});
+
 export default function Home() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -14,13 +21,6 @@ export default function Home() {
   const [user, setUser] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSignupForm, setIsSignupForm] = useState(false);
-
-  var webAuth = new WebAuth({
-    domain: process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL,
-    clientID: process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID,
-    redirectUri: "http://localhost:3000",
-    scope: "openid profile email",
-  });
 
   const handleForm = (event) => {
     event.preventDefault();
@@ -40,6 +40,7 @@ export default function Home() {
         },
         (err) => {
           if (err) return alert("Something went wrong: " + err.message);
+          console.log("success signup without login!")
           return alert("success signup without login!");
         }
       );
@@ -57,6 +58,7 @@ export default function Home() {
         },
         (err) => {
           if (err) {
+            console.log(err)
             alert(err.description);
           }
         }
@@ -70,22 +72,20 @@ export default function Home() {
     const errorMessage = errorHash.get("error_description");
 
     if (errorMessage) {
-      alert(errorMessage);
-      return;
+      console.log(errorMessage)
+      return alert(errorMessage);
     }
 
     const accessToken = hash.get("access_token") || cookie.get("access_token");
-
-    console.log("checking");
     console.log("access_token", accessToken);
 
     if (accessToken) {
       setIsAuthenticated(true);
       webAuth.client.userInfo(accessToken, (err, user) => {
         if (err) {
-          return alert(err);
+          console.log(err)
+          return alert(err.description);
         }
-
         setUser(user);
         console.log(user);
         cookie.set("access_token", accessToken);
