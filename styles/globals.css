@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+label {
+  margin:15px
+}
+
+button {
+  margin:15px
+}
+
+input {
+  font-size: 30px;
+}
+
+button {
+  font-size: 20px;
+}
