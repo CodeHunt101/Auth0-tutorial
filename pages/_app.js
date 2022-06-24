@@ -1,12 +1,16 @@
 import React from 'react';
+import styles from '../styles/Home.module.css'
 import '../styles/globals.css'
-// import { UserProvider } from '@auth0/nextjs-auth0';
+
+
 
 function MyApp({ Component, pageProps }) {
   return (
-  // <UserProvider>
+    <div className={styles.App}>
+        <div className={styles["App-header"]}>
     <Component {...pageProps} />
-  // </UserProvider>
+    </div>
+      </div>
   )
 }
 
