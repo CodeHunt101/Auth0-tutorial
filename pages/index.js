@@ -40,7 +40,7 @@ export default function Home() {
         },
         (err) => {
           if (err) return alert("Something went wrong: " + err.message);
-          console.log("success signup without login!")
+          console.log("success signup without login!");
           return alert("success signup without login!");
         }
       );
@@ -58,7 +58,7 @@ export default function Home() {
         },
         (err) => {
           if (err) {
-            console.log(err)
+            console.log(err);
             alert(err.description);
           }
         }
@@ -72,7 +72,7 @@ export default function Home() {
     const errorMessage = errorHash.get("error_description");
 
     if (errorMessage) {
-      console.log(errorMessage)
+      console.log(errorMessage);
       return alert(errorMessage);
     }
 
@@ -83,7 +83,7 @@ export default function Home() {
       setIsAuthenticated(true);
       webAuth.client.userInfo(accessToken, (err, user) => {
         if (err) {
-          console.log(err)
+          console.log(err);
           return alert(err.description);
         }
         setUser(user);
@@ -98,9 +98,7 @@ export default function Home() {
     webAuth.logout({ returnTo: "http://localhost:3000" });
   };
 
-  const toggleForms = () => {
-    setIsSignupForm(!isSignupForm);
-  };
+  const toggleForms = () => setIsSignupForm(!isSignupForm);
 
   return (
     <>
