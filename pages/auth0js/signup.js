@@ -38,7 +38,7 @@ const SignUp = () => {
       <div className={styles.App}>
         <div className={styles["App-header"]}>
           <div>
-            <h2>IOOF</h2>
+            <h2>IOOF (Sign up)</h2>
           </div>
 
           <form className={styles.card} onSubmit={handleForm}>
