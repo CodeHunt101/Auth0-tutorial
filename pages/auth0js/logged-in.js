@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { webAuth } from "../../helpers/webAuth";
 import Cookies from "universal-cookie";
+import Image from "next/image";
 const cookie = new Cookies();
 
 const LoggedIn = () => {
@@ -40,8 +41,8 @@ const LoggedIn = () => {
   return (
     user && (
       <>
-        <h1>User Info</h1>
-        <img src={user.picture} />
+        <h2>User Info</h2>
+        <Image src={user.picture} alt=""/>
         <ul>
           <li>Email: {user.email}</li>
           <li>First Name: {user.given_name}</li>

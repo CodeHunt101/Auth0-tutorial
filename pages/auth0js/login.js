@@ -1,40 +1,38 @@
-import styles from "../../styles/Home.module.css";
-import { useRef } from "react";
-import { webAuth } from "../../helpers/webAuth";
+import styles from '../../styles/Home.module.css'
+import { useRef } from 'react'
+import { webAuth } from '../../helpers/webAuth'
 
 const LoginAuth0Js = () => {
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const emailInputRef = useRef()
+  const passwordInputRef = useRef()
 
   const handleForm = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const email = emailInputRef.current.value;
-    const password = passwordInputRef.current.value;
+    const email = emailInputRef.current.value
+    const password = passwordInputRef.current.value
 
     webAuth.login(
       {
-        responseType: "token",
-        realm: "Username-Password-Authentication",
+        responseType: 'token',
+        realm: 'Username-Password-Authentication',
         email,
         password,
       },
       (err) => {
         if (err) {
-          console.log(err);
-          alert(err.description);
+          console.log(err)
+          alert(err.description)
         }
       }
-    );
-  };
+    )
+  }
 
   return (
     <>
-      <div>
-        <h2>IOOF (Log in)</h2>
-      </div>
+      <h2>IOOF (Log in)</h2>
       <form className={styles.card} onSubmit={handleForm}>
-        <div className={styles["card-section"]}>
+        <div className={styles['card-section']}>
           <label htmlFor="email">Email</label>
           <input
             ref={emailInputRef}
@@ -43,7 +41,7 @@ const LoginAuth0Js = () => {
             placeholder="Enter your email"
           />
         </div>
-        <div className={styles["card-section"]}>
+        <div className={styles['card-section']}>
           <label htmlFor="password">Password</label>
           <input
             ref={passwordInputRef}
@@ -55,7 +53,7 @@ const LoginAuth0Js = () => {
         <button type="submit">Submit</button>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default LoginAuth0Js;
+export default LoginAuth0Js
