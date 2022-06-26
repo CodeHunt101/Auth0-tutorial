@@ -1,6 +1,7 @@
 import { webAuth } from '../../helpers/webAuth'
 import { useState } from 'react'
 import styles from '../../styles/Home.module.css'
+import { Auth0Error } from 'auth0-js'
 
 const PasswordReset = () => {
   const [loginInfo, setLoginInfo] = useState({
@@ -24,7 +25,7 @@ const PasswordReset = () => {
         connection: 'Username-Password-Authentication',
         email: loginInfo.email,
       },
-      function (error, result) {
+      function (error: Auth0Error, result: any) {
         if (error) {
           console.log(error)
           return

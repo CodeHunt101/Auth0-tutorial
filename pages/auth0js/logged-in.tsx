@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { webAuth } from "../../helpers/webAuth";
 import Cookies from "universal-cookie";
 import Image from "next/image";
+import { Auth0UserProfile } from "auth0-js";
 const cookie = new Cookies();
 
 const LoggedIn = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<Auth0UserProfile>();
 
   useEffect(() => {
     const hash = new URLSearchParams(window.location.hash.replace("#", ""));
@@ -42,7 +43,7 @@ const LoggedIn = () => {
     user && (
       <>
         <h2>User Info</h2>
-        <Image src={user.picture} alt=""/>
+        <Image src={user.picture} alt="" width={100} height={100}/>
         <ul>
           <li>Email: {user.email}</li>
           <li>First Name: {user.given_name}</li>

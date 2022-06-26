@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import styles from '../../styles/Home.module.css'
 import { webAuth } from '../../helpers/webAuth'
+import { Auth0Error } from 'auth0-js'
 
 const SignUp = () => {
   const emailInputRef = useRef()
@@ -10,27 +11,27 @@ const SignUp = () => {
   const handleForm = (event) => {
     event.preventDefault()
 
-    const email = emailInputRef.current.value
-    const password = passwordInputRef.current.value
-    const accountNumber = accountNumberInputRef.current.value
+    let email = (emailInputRef.current as HTMLInputElement)
+    let password = (passwordInputRef.current as HTMLInputElement)
+    let accountNumber = (accountNumberInputRef.current as HTMLInputElement)
 
     webAuth.signup(
       {
         connection: 'Username-Password-Authentication',
-        email,
-        password,
-        userMetadata: { account_number: accountNumber.toString() },
+        email:email.value,
+        password:password.value,
+        userMetadata: { account_number: accountNumber.value.toString() },
       },
-      (err) => {
-        if (err) return alert('Something went wrong: ' + err.message)
+      (err:Auth0Error) => {
+        if (err) return alert('Something went wrong: ' + err.description)
         console.log('success signup without login!')
         return alert('success signup without login!')
       }
     )
-
-    emailInputRef.current.value = ''
-    passwordInputRef.current.value = ''
-    accountNumberInputRef.current.value = ''
+    
+    email.value = ''
+    password.value = ''
+    accountNumber.value = ''
   }
 
   return (

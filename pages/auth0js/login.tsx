@@ -6,18 +6,18 @@ const LoginAuth0Js = () => {
   const emailInputRef = useRef()
   const passwordInputRef = useRef()
 
-  const handleForm = (event) => {
+  const handleForm = (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    const email = emailInputRef.current.value
-    const password = passwordInputRef.current.value
+    let email = (emailInputRef.current as HTMLInputElement)
+    let password = (passwordInputRef.current as HTMLInputElement)
 
     webAuth.login(
       {
         responseType: 'token',
         realm: 'Username-Password-Authentication',
-        email,
-        password,
+        email: email.value,
+        password: password.value,
       },
       (err) => {
         if (err) {
