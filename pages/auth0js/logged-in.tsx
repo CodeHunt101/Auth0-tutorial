@@ -43,7 +43,7 @@ const LoggedIn = () => {
     user && (
       <>
         <h2>User Info</h2>
-        <Image src={user.picture} alt="" width={100} height={100}/>
+        <Image src={user.picture} alt="" width={100} height={100} />
         <ul>
           <li>Email: {user.email}</li>
           <li>First Name: {user.given_name}</li>

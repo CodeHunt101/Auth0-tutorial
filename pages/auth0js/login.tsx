@@ -1,10 +1,11 @@
 import styles from '../../styles/Home.module.css'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { webAuth } from '../../helpers/webAuth'
 
 const LoginAuth0Js = () => {
   const emailInputRef = useRef()
   const passwordInputRef = useRef()
+  const [message, setMessage] = useState<string>()
 
   const handleForm = (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -22,7 +23,8 @@ const LoginAuth0Js = () => {
       (err) => {
         if (err) {
           console.log(err)
-          alert(err.description)
+          setMessage('Something went wrong: ' + err.description)
+          return
         }
       }
     )
@@ -31,6 +33,7 @@ const LoginAuth0Js = () => {
   return (
     <>
       <h2>IOOF (Log in)</h2>
+      {message && <h3>{message}</h3>}
       <form className={styles.card} onSubmit={handleForm}>
         <div className={styles['card-section']}>
           <label htmlFor="email">Email</label>

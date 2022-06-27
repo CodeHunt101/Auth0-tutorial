@@ -1,45 +1,45 @@
-import { webAuth } from '../../helpers/webAuth'
-import { useState } from 'react'
-import styles from '../../styles/Home.module.css'
-import { Auth0Error } from 'auth0-js'
+import { webAuth } from "../../helpers/webAuth";
+import { useState } from "react";
+import styles from "../../styles/Home.module.css";
+import { Auth0Error } from "auth0-js";
 
 const PasswordReset = () => {
   const [loginInfo, setLoginInfo] = useState({
-    email: '',
-  })
+    email: "",
+  });
 
-  const [disableSubmit, setDisableSubmit] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleLoginInfoChange = (event) => {
-    setLoginInfo({ ...loginInfo, [event.target.name]: event.target.value })
-  }
+    setLoginInfo({ ...loginInfo, [event.target.name]: event.target.value });
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    setDisableSubmit(true)
-    setErrorMsg('')
+    event.preventDefault();
+    setDisableSubmit(true);
+    setErrorMsg("");
 
     webAuth.changePassword(
       {
-        connection: 'Username-Password-Authentication',
+        connection: "Username-Password-Authentication",
         email: loginInfo.email,
       },
       function (error: Auth0Error, result: any) {
         if (error) {
-          console.log(error)
-          return
+          console.log(error);
+          return;
         }
-        console.log(result)
+        console.log(result);
       }
-    )
-  }
+    );
+  };
 
   return (
     <>
       <h2>IOOF (Password Reset)</h2>
       <form onSubmit={handleSubmit} className={styles.card}>
-        <div className={styles['card-section']}>
+        <div className={styles["card-section"]}>
           <input
             type="text"
             name="email"
@@ -52,7 +52,7 @@ const PasswordReset = () => {
         <p>{errorMsg}</p>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default PasswordReset
+export default PasswordReset;
